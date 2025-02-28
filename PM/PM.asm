@@ -936,7 +936,6 @@ io_delay:
 ; int handler ---------------------------------------------------------------
 _ClockHandler:
 ClockHandler equ _ClockHandler - $$
-_ClockHandler:
     pushad
     mov ax, SelectorData
     mov ds, ax
