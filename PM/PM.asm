@@ -843,14 +843,15 @@ LABEL_SEG_CODE32:
 	mov word [time_slice_remaining], 16
 
 	call	Init8259A
-	sti
-	; cli
+	；sti
+	cli
 
 	; jmp	SelectorTSS0:0
 
 	push SelectorLDT0Stack3
 	push TopOfTask0Stack3
-	pushf
+	pushf                   ; 压入当前 EFLAGS 的值
+	or dword [esp], 0x0200  ; 修改栈上的 EFLAGS，将 IF 标志位置为 1（启用中断）
 	push SelectorLDT0Code
 	push 0
 	iret
